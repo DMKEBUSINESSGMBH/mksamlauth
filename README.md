@@ -8,8 +8,8 @@
 
 [![Latest Version](https://img.shields.io/github/release/DMKEBUSINESSGMBH/mksamlauth.svg?style=flat-square)](https://github.com/DMKEBUSINESSGMBH/mksamlauth/releases)
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/quality-score.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=8.7)
-[![Code Coverage](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/coverage.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=8.7)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/quality-score.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=9.5)
+[![Code Coverage](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/coverage.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=9.5)
 
 This extension adds the availability for frontend users to sign in with
 an IdP provider through the SAML2 protocol.
@@ -19,7 +19,7 @@ an IdP provider through the SAML2 protocol.
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this package:
 
 ```
-$ composer require dmk/mksamlauth
+$ composer require dmk/mksamlauth:^9
 ```
 
 This command requires you to have Composer installed globally, as explained in the installation chapter of the Composer documentation.
