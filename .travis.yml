@@ -17,6 +17,11 @@ cache:
 before_script:
     - composer require typo3/minimal=$TYPO3_VERSION
     - git checkout composer.json
-    - .Build/bin/phpunit --coverage-text
+
+script:
+    - .Build/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 
+after_script:
+  - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
