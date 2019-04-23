@@ -15,7 +15,7 @@ cache:
 
 
 before_script:
-    - composer require typo3/minimal=$TYPO3_VERSIO
+    - composer require typo3/minimal=$TYPO3_VERSION
     - git checkout composer.json
     - .Build/bin/phpunit --coverage-text
 
