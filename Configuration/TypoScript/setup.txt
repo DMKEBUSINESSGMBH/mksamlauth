@@ -1,0 +1,26 @@
+plugin.tx_mksamlauth {
+    x509Certificate =
+    privateKey =
+    test =
+
+    idp {
+        issuer = example.de
+        destination = https://idp.example.de/saml2/idp/SSOService.php
+    }
+}
+
+config.tx_extbase {
+    persistence {
+        classes {
+            TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+                mapping {
+                    tableName = fe_users
+                    recordType >
+                    columns {
+                        lockToDomain.mapOnProperty = lockToDomain
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "name": "dmk/mksamlauth",
+    "description": "",
+    "type": "typo3-cms-extension",
+    "keywords": [
+        "TYPO3 CMS",
+        "saml",
+        "auth"
+    ],
+    "homepage": "http://www.dmk-ebusiness.de/",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Eric Hertwig",
+            "email": "eric.hertwig@dmk-ebusiness.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Markus Bachmann",
+            "email": "markus.bachmann@dmk-ebusiness.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "typo3/cms-core": "^8.7 || ^9.5",
+        "lightsaml/lightsaml": "^1.4",
+        "symfony/http-foundation": "^3.4"
+    },
+    "require-dev": {
+        "saschaegerer/phpstan-typo3": "*@dev",
+        "phpstan/phpstan-strict-rules": "*",
+        "phpstan/phpstan": "*",
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "phpunit/phpunit": "^6.0",
+        "nimut/testing-framework": "^4.1",
+        "helmich/typo3-typoscript-lint": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "DMK\\MKSamlAuth\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DMK\\MKSamlAuth\\Tests\\": "Tests"
+        }
+    },
+    "support": {
+        "email": "dev@dmk-ebusiness.de"
+    },
+    "replace": {
+        "typo3-ter/mksamlauth": "*"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
+        "preferred-install": {
+            "typo3/cms": "source"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web"
+        }
+    }
+}

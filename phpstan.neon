@@ -1,0 +1,13 @@
+includes:
+	- .Build/vendor/saschaegerer/phpstan-typo3/extension.neon
+	- .Build/vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    excludes_analyse:
+        - %rootDir%/../../../../.Build
+    autoload_directories:
+        - %rootDir%/../../../../
+    ignoreErrors:
+        - '#Constant TYPO3_MODE not found#'
+        - '#Undefined variable: \$_EXTKEY#'

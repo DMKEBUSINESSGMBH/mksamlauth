@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1415814796" source-language="en" datatype="plaintext" original="messages">
+        <header/>
+        <body>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider">
+                <source>Identity Provider</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_domain">
+                <source>Domain</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_user_folder">
+                <source>User Folder</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_url">
+                <source>Url</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_key">
+                <source>OpenSSL Key</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_passphrase">
+                <source>Passphrase</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_certificate">
+                <source>Certificate</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.default_groups_enable">
+                <source>Enable Default Groups on UserCreate</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.default_groups">
+                <source>Default Groups</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider">
+                <source>Service Provider</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_domain">
+                <source>Domain</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_certificate">
+                <source>Certificate</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_key">
+                <source>OpenSSL Key</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_passphrase">
+                <source>OpenSSL Key - Passphrase</source>
+            </trans-unit>
+
+            <trans-unit id="tx_mksamlauth_domain_model_group_mapping">
+                <source>Group Mapping</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_group_mapping.idp_name">
+                <source>Groupname from SSO</source>
+            </trans-unit>
+            <trans-unit id="tx_mksaml_auth.domain_model_group_mapping.group_ids">
+                <source>Groups</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
