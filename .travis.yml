@@ -6,7 +6,9 @@ matrix:
         - php: 7.1
           env: TYPO3_VERSION=^8
         - php: 7.2
-          env: TYPO3_VERSION=^8
+          env:
+            - TYPO3_VERSION=^8
+            - COVERAGE=true
 
 
 cache:
