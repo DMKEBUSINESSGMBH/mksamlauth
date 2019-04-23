@@ -1,0 +1,22 @@
+language: php
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.1
+          env: TYPO3_VERSION=^8
+        - php: 7.2
+          env: TYPO3_VERSION=^8
+
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+
+before_script:
+    - composer require typo3/minimal=$TYPO3_VERSIO
+    - git checkout composer.json
+    - .Build/bin/phpunit --coverage-text
+
+
