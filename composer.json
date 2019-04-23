@@ -1,6 +1,6 @@
 {
     "name": "dmk/mksamlauth",
-    "description": "",
+    "description": "SSO Authentication for your TYPO3 Frontend",
     "type": "typo3-cms-extension",
     "keywords": [
         "TYPO3 CMS",
@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "typo3/cms-core": "^8.7 || ^9.5",
         "lightsaml/lightsaml": "^1.4",
         "symfony/http-foundation": "^3.4"
