@@ -38,5 +38,5 @@ $EM_CONF[$_EXTKEY] = [
     ],
     '_md5_values_when_last_written' => '',
     'suggests' => [],
-    'createDirs' => 'typo3temp/t3twig/',
+    'createDirs' => '',
 ];
