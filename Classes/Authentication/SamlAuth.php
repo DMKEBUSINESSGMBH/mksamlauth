@@ -45,7 +45,7 @@ class SamlAuth extends AuthenticationService
         return false;
     }
 
-    public function authUser(array $user)
+    public function authUser(array $user) : int
     {
         return 200;
     }
