@@ -4,21 +4,22 @@ matrix:
     fast_finish: true
     include:
         - php: 7.2
-          env: TYPO3_VERSION=^9
+          env:
+            - COVERAGE=true
         - php: 7.3
-          env: TYPO3_VERSION=^9
 
 cache:
     directories:
         - $HOME/.composer/cache
 
+install:
+  - travis_retry composer update --prefer-dist
 
 before_script:
     - git checkout composer.json
 
 script:
     - .Build/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-
 
 after_script:
   - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
