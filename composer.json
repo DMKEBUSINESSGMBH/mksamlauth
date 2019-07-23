@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "typo3/cms-core": "^9.5",
+        "typo3/cms-core": "^10",
         "lightsaml/lightsaml": "^1.4",
         "symfony/http-foundation": "^3.4"
     },
@@ -61,7 +61,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "9.5.x-dev"
+            "dev-master": "10.0.x-dev"
         },
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
