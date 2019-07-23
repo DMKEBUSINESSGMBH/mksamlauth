@@ -13,13 +13,14 @@ cache:
     directories:
         - $HOME/.composer/cache
 
+install:
+  - travis_retry composer update --prefer-dist
 
 before_script:
     - git checkout composer.json
 
 script:
     - .Build/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-
 
 after_script:
   - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
