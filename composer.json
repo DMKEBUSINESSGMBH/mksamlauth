@@ -34,7 +34,7 @@
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpunit/phpunit": "^6.0",
         "nimut/testing-framework": "^4.1",
-        "helmich/typo3-typoscript-lint": "^1.4"
+        "helmich/typo3-typoscript-lint": "^2.0"
     },
     "autoload": {
         "psr-4": {
