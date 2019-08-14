@@ -32,7 +32,7 @@ class FrontendUser
 
     public function getProperty($name)
     {
-        if (false === \array_key_exists($name, $this->data)) {
+        if (false === array_key_exists($name, $this->data)) {
             throw new PropertyNotFoundException(sprintf(
                 'The property "%s" does not exists!',
                 $name
