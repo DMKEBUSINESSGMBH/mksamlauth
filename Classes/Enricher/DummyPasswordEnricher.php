@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DMK\MKSamlAuth\Enricher;
 
 use DMK\MKSamlAuth\Model\FrontendUser;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 
 class DummyPasswordEnricher implements EnricherInterface
 {
