@@ -17,7 +17,7 @@ class SimpleAttributeEnricher implements EnricherInterface
     public function process(FrontendUser $user, array $context)
     {
         foreach ($context['attributes'] as $key => $value) {
-            if (!\array_key_exists($key, $this->map)) {
+            if (!array_key_exists($key, $this->map)) {
                 continue;
             }
 
