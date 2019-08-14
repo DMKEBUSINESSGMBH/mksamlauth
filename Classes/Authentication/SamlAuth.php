@@ -67,7 +67,7 @@ class SamlAuth extends AuthenticationService
         $attributes = iterator_to_array($attributes);
 
         $record = $this->om->get(IdentityProviderRepository::class)
-            ->findByHostname(GeneralUtility::getHostname());
+            ->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
 
         return $this->om->get(UserCreator::class)->updateOrCreate($attributes, $record);
     }
@@ -75,7 +75,7 @@ class SamlAuth extends AuthenticationService
     private function send()
     {
         $record = $this->om->get(IdentityProviderRepository::class)
-            ->findByHostname(GeneralUtility::getHostname());
+            ->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
 
         if (false === $record) {
             return false;
