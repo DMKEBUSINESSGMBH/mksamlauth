@@ -4,10 +4,10 @@
         <header/>
         <body>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider">
-                <source>Identity Provider</source>
+                <source>SAML Configuration</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_name">
-                <source>Name</source>
+                <source>Entity-ID</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_domain">
                 <source>Domain</source>
@@ -16,7 +16,7 @@
                 <source>User Folder</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_url">
-                <source>Url</source>
+                <source>SAML 2.0 Endpoint</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_key">
                 <source>OpenSSL Key</source>
@@ -25,6 +25,12 @@
                 <source>Passphrase</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_certificate">
+                <source>Certificate</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_idp_entity_id">
+                <source>IdP Entity-ID</source>
+            </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_idp_certificate">
                 <source>Certificate</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.default_groups_enable">

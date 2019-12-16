@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1567498660%" source-language="en" datatype="plaintext" original="messages">
+        <header/>
+        <body>
+            <trans-unit id="idp">
+                <source>Identity Provider</source>
+                <target>Identity Provider</target>
+            </trans-unit>
+            <trans-unit id="general">
+                <source>General</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="sp">
+                <source>Service Provider</source>
+                <target>Service Provider</target>
+            </trans-unit>
+            <trans-unit id="features">
+                <source>Features</source>
+                <target>Features</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

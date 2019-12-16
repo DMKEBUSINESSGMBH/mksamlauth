@@ -3,6 +3,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_group_mapping',
         'label' => 'idp_name',
+        'iconfile' => 'EXT:mksamlauth/Resources/Public/Icons/Extension.png',
     ],
     'columns' => [
         'idp_name' => [

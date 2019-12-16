@@ -12,6 +12,7 @@
 use DMK\MKSamlAuth\Authentication\SamlAuth;
 use DMK\MKSamlAuth\EnricherRegistry;
 use DMK\MKSamlAuth\Enricher;
+use DMK\MKSamlAuth\Store\IdStore;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 if (!defined('TYPO3_MODE')) {
@@ -40,3 +41,13 @@ EnricherRegistry::register(Enricher\SamlHostnameEnricher::class, 100);
 EnricherRegistry::register(Enricher\SimpleAttributeEnricher::class);
 EnricherRegistry::register(Enricher\SSOGroupEnricher::class, 10);
 EnricherRegistry::register(Enricher\DefaultGroupEnricher::class);
+
+$TYPO3_CONF_VARS['SVCONF']['auth']['setup']['FE_alwaysFetchUser'] = true;
+
+
+if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][IdStore::CACHE_KEY])) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][IdStore::CACHE_KEY] = [];
+}
+if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][IdStore::CACHE_KEY]['backend'])) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][IdStore::CACHE_KEY]['backend'] = \TYPO3\CMS\Core\Cache\Backend\FileBackend::class;
+}
