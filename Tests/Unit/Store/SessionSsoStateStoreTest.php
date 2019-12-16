@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Tests\Unit\Store;
 
+use DMK\MKSamlAuth\Session\PhpSession;
 use DMK\MKSamlAuth\Store\SessionSsoStateStore;
 use LightSaml\State\Sso\SsoState;
 use PHPStan\Testing\TestCase;
@@ -20,23 +21,19 @@ class SessionSsoStateStoreTest extends TestCase
     /**
      * @var \Prophecy\Prophecy\ObjectProphecy
      */
-    private $user;
+    private $session;
 
     protected function setUp()
     {
-        $this->user = $this->prophesize(FrontendUserAuthentication::class);
+        $this->session = $this->prophesize(PhpSession::class);
 
-        $fe = $this->prophesize(TypoScriptFrontendController::class);
-        $fe->fe_user = $this->user->reveal();
-        $GLOBALS['TSFE'] = $fe->reveal();
-
-        $this->store = new SessionSsoStateStore();
+        $this->store = new SessionSsoStateStore($this->session->reveal());
     }
     public function testGet()
     {
         $state = new SsoState();
 
-        $this->user->getSessionData(SessionSsoStateStore::SESSION_KEY)
+        $this->session->get('sso_state')
             ->willReturn(serialize($state));
 
         self::assertEquals($state, $this->store->get());
@@ -44,13 +41,13 @@ class SessionSsoStateStoreTest extends TestCase
 
     public function testGetNull()
     {
-        $this->user->getSessionData(SessionSsoStateStore::SESSION_KEY)
+        $this->session->get('sso_state')
             ->willReturn(null);
 
-        $this->user->setAndSaveSessionData(SessionSsoStateStore::SESSION_KEY, Argument::type('string'))
+        $this->session->set('sso_state', Argument::type('string'))
             ->shouldBeCalled();
 
-        $this->user->getSessionId()->willReturn('foo');
+        $this->session->getId()->willReturn('foo');
 
         self::assertInstanceOf(SsoState::class, $state = $this->store->get());
         self::assertSame('foo', $state->getLocalSessionId());

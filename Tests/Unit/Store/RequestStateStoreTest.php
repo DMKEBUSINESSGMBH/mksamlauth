@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Tests\Unit\Store;
 
+use DMK\MKSamlAuth\Session\PhpSession;
 use DMK\MKSamlAuth\Store\RequestStateStore;
 use LightSaml\State\Request\RequestState;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class RequestStateStoreTest extends TestCase
 {
@@ -17,30 +16,22 @@ class RequestStateStoreTest extends TestCase
      */
     private $store;
     /**
-     * @var \Prophecy\Prophecy\ObjectProphecy
+     * @var PhpSession|\Prophecy\Prophecy\ObjectProphecy
      */
-    private $user;
+    private $session;
 
     protected function setUp()
     {
-        $this->user = $this->prophesize(FrontendUserAuthentication::class);
-
-        $fe = $this->prophesize(TypoScriptFrontendController::class);
-        $fe->fe_user = $this->user->reveal();
-        $GLOBALS['TSFE'] = $fe->reveal();
-
-        $this->store = new RequestStateStore();
+        $this->session = $this->prophesize(PhpSession::class);
+        $this->store = new RequestStateStore($this->session->reveal());
     }
 
     public function testSet()
     {
         $state = new RequestState('test');
 
-        $this->user->getSessionData(RequestStateStore::SESSION_KEY)
-            ->willReturn(null);
-
-        $this->user->setAndSaveSessionData(RequestStateStore::SESSION_KEY, ['test' => $state])
-            ->shouldBeCalled();
+        $this->session->get('req_state')->willReturn([]);
+        $this->session->set('req_state', ['test' => $state]);
 
         $this->store->set($state);
     }
@@ -49,8 +40,7 @@ class RequestStateStoreTest extends TestCase
     {
         $state = new RequestState('test');
 
-        $this->user->getSessionData(RequestStateStore::SESSION_KEY)
-            ->willReturn(['test' => $state]);
+        $this->session->get('req_state')->willReturn(['test' => $state]);
 
         self::assertSame($state, $this->store->get('test'));
     }

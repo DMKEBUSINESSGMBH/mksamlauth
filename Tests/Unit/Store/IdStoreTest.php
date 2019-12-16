@@ -37,14 +37,14 @@ class IdStoreTest extends TestCase
 
     public function testHas()
     {
-        $this->cache->has('footest')->willReturn(false);
+        $this->cache->has('cdeb68b68f311608163d0d2f451ac96a')->willReturn(false);
 
         self::assertFalse($this->store->has('foo', 'test'));
     }
 
     public function testSet()
     {
-        $this->cache->set('footest', 'cdeb68b68f311608163d0d2f451ac96a', [], 300)
+        $this->cache->set('cdeb68b68f311608163d0d2f451ac96a', 'cdeb68b68f311608163d0d2f451ac96a', [], 300)
             ->shouldBeCalled();
 
         $this->store->set('foo', 'test', new \DateTime('+5 minutes'));
