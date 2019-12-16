@@ -14,11 +14,10 @@ use DMK\MKSamlAuth\Service\UserCreator;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilder;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpSendAuthnRequestProfileBuilderFactory;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
-use TYPO3\CMS\Core\Authentication\AuthenticationService;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use TYPO3\CMS\Sv\AuthenticationService;
 
 class SamlAuth extends AuthenticationService
 {
