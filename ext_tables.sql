@@ -16,6 +16,8 @@ CREATE TABLE tx_mksamlauth_domain_model_identityprovider (
     url VARCHAR(255) DEFAULT '' NOT NULL,
     certificate text NOT NULL,
     cert_key text NOT NULL,
+    idp_entity_id text NOT NULL,
+    idp_certificate text NULL,
     passphrase VARCHAR(255) NULL,
     default_groups_enable int(1) DEFAULT '0' NOT NULL,
     default_groups tinytext,

@@ -31,8 +31,9 @@
         "saschaegerer/phpstan-typo3": "*@dev",
         "phpstan/phpstan-strict-rules": "*",
         "phpstan/phpstan": "*",
+        "roave/security-advisories": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.13",
-        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit": "^7.1",
         "nimut/testing-framework": "^4.1",
         "helmich/typo3-typoscript-lint": "^1.4"
     },
@@ -58,6 +59,12 @@
         "preferred-install": {
             "typo3/cms": "source"
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "mkdir -p .Build/Web/typo3conf/ext/",
+            "[ -L .Build/Web/typo3conf/ext/mksamlauth ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/mksamlauth"
+        ]
     },
     "extra": {
         "branch-alias": {
