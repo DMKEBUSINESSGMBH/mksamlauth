@@ -4,6 +4,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider',
         'label' => 'name',
+        'iconfile' => 'EXT:mksamlauth/Resources/Public/Icons/Extension.png',
     ],
     'columns' => [
         'name' => [
@@ -48,11 +49,24 @@ return [
                 'eval' => 'required'
             ]
         ],
+        'idp_entity_id' => [
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_idp_entity_id',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'required'
+            ]
+        ],
+        'idp_certificate' => [
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_idp_certificate',
+            'config' => [
+                'type' => 'text',
+                'eval' => 'required'
+            ]
+        ],
         'cert_key' => [
             'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_key',
             'config' => [
                 'type' => 'text',
-                'eval' => 'required'
             ]
         ],
         'passphrase' => [
@@ -79,7 +93,16 @@ return [
         ]
     ],
     'types' => [
-        '0' => ['showitem' => 'name, url, certificate, cert_key, passphrase, domain, user_folder, default_groups_enable, default_groups'],
-        '1' => ['showitem' => 'default_groups_enable, default_groups']
+        '0' => [
+            'showitem' => '
+                --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:general,
+                    domain,user_folder,
+                --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:sp,
+                    name,certificate,cert_key,passphrase,
+                --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:idp,
+                    idp_entity_id,url,idp_certificate,
+                --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:features,
+                    default_groups_enable,default_groups
+            '],
     ]
 ];

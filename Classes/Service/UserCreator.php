@@ -25,7 +25,7 @@ final class UserCreator implements SingletonInterface
     {
         $userFolder = $record['user_folder'];
 
-        if (!$attributes['uid'] ?? false) {
+        if (!($attributes['uid'] ?? false)) {
             throw new \LogicException('The idp does not return any "uid". Please check the configuration in the idp settings.');
         }
 
