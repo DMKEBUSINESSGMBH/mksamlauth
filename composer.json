@@ -34,7 +34,7 @@
         "roave/security-advisories": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpunit/phpunit": "^7.1",
-        "nimut/testing-framework": "^4.1",
+        "nimut/testing-framework": "^5.0",
         "helmich/typo3-typoscript-lint": "^1.4"
     },
     "autoload": {
