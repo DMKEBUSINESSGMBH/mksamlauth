@@ -6,7 +6,6 @@ namespace DMK\MKSamlAuth\Container;
 
 use LightSaml\Build\Container\BuildContainerInterface;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Extbase\Object\Container\Container;
 
 class BuildContainer implements BuildContainerInterface, SingletonInterface
 {

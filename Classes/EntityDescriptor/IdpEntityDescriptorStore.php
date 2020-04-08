@@ -7,7 +7,6 @@ namespace DMK\MKSamlAuth\EntityDescriptor;
 use LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Model\Metadata\EntityDescriptor;
-use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -41,7 +40,7 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
 
     public function has($entityId)
     {
-        return $this->get($entityId) !== null;
+        return null !== $this->get($entityId);
     }
 
     public function all()

@@ -8,11 +8,7 @@ use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Store\CredentialStore;
 use LightSaml\Build\Container\OwnContainerInterface;
 use LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder;
-use LightSaml\Credential\CredentialInterface;
-use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
-use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -37,7 +33,7 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
     {
         $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
 
-        if (false === is_array($record)) {
+        if (false === \is_array($record)) {
             return null;
         }
 
@@ -56,7 +52,7 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
     {
         $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
 
-        if (false === is_array($record)) {
+        if (false === \is_array($record)) {
             return null;
         }
 

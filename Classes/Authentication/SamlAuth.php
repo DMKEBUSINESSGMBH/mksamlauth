@@ -41,7 +41,7 @@ class SamlAuth extends AuthenticationService
 
     public function getUser()
     {
-        if (!is_array($this->configuration)) {
+        if (!\is_array($this->configuration)) {
             return false;
         }
 
@@ -65,12 +65,12 @@ class SamlAuth extends AuthenticationService
 
     public function authUser(array $user): int
     {
-        return is_array($this->configuration) ? 200 : 0;
+        return \is_array($this->configuration) ? 200 : 0;
     }
 
     private function receive(): FrontendUser
     {
-        if (!is_array($this->configuration)) {
+        if (!\is_array($this->configuration)) {
             throw new MissingConfigurationException(sprintf(
                 'There is no configuration for %s',
                 GeneralUtility::getIndpEnv('HTTP_HOST')
@@ -93,13 +93,13 @@ class SamlAuth extends AuthenticationService
 
     private function send(): bool
     {
-        if (!is_array($this->configuration)) {
+        if (!\is_array($this->configuration)) {
             return false;
         }
 
         $buildContainer = $this->om->get(BuildContainer::class);
         $factory = new SsoSpSendAuthnRequestProfileBuilderFactory($buildContainer);
-        $pb      = $factory->get($this->configuration['idp_entity_id']);
+        $pb = $factory->get($this->configuration['idp_entity_id']);
 
         $action = $pb->buildAction();
         $context = $pb->buildContext();

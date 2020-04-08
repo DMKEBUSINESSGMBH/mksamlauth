@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DMK\MKSamlAuth\EntityDescriptor;
 
 use LightSaml\Model\Metadata\EntityDescriptor;
-use LightSaml\Model\Metadata\IdpSsoDescriptor;
-use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;

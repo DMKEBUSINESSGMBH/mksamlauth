@@ -18,15 +18,11 @@ use LightSaml\Resolver\Endpoint\LocationEndpointResolver;
 use LightSaml\Resolver\Endpoint\ServiceTypeEndpointResolver;
 use LightSaml\Resolver\Session\SessionProcessor;
 use LightSaml\Resolver\Signature\OwnSignatureResolver;
-use LightSaml\State\Sso\SsoSessionState;
-use LightSaml\Store\Sso\SsoStateSessionStore;
 use LightSaml\Validator\Model\Assertion\AssertionTimeValidator;
 use LightSaml\Validator\Model\Assertion\AssertionValidator;
 use LightSaml\Validator\Model\NameId\NameIdValidator;
 use LightSaml\Validator\Model\Signature\SignatureValidator;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\Container\Container;
 
 class ServiceContainer implements ServiceContainerInterface, SingletonInterface
 {
@@ -50,7 +46,7 @@ class ServiceContainer implements ServiceContainerInterface, SingletonInterface
     public function getSignatureResolver()
     {
         return $this->container->getInstance(OwnSignatureResolver::class, [
-            $this->getCredentialResolver()
+            $this->getCredentialResolver(),
         ]);
     }
 
@@ -61,7 +57,7 @@ class ServiceContainer implements ServiceContainerInterface, SingletonInterface
             $this->container->getInstance(DescriptorTypeEndpointResolver::class),
             $this->container->getInstance(ServiceTypeEndpointResolver::class),
             $this->container->getInstance(IndexEndpointResolver::class),
-            $this->container->getInstance(LocationEndpointResolver::class)
+            $this->container->getInstance(LocationEndpointResolver::class),
         ]]);
     }
 
@@ -78,7 +74,7 @@ class ServiceContainer implements ServiceContainerInterface, SingletonInterface
     public function getSignatureValidator()
     {
         return $this->container->getInstance(SignatureValidator::class, [
-            $this->getCredentialResolver()
+            $this->getCredentialResolver(),
         ]);
     }
 
@@ -86,7 +82,7 @@ class ServiceContainer implements ServiceContainerInterface, SingletonInterface
     {
         /** @var CredentialResolverFactory $factory */
         $factory = $this->container->getInstance(CredentialResolverFactory::class, [
-            $this->container->getInstance(CredentialStore::class)
+            $this->container->getInstance(CredentialStore::class),
         ]);
 
         return $factory->build();
@@ -101,7 +97,7 @@ class ServiceContainer implements ServiceContainerInterface, SingletonInterface
     {
         return $this->container->getInstance(SessionProcessor::class, [
             $this->container->getInstance(SessionSsoStateStore::class),
-            $this->container->getInstance(SystemTimeProvider::class)
+            $this->container->getInstance(SystemTimeProvider::class),
         ]);
     }
 }
