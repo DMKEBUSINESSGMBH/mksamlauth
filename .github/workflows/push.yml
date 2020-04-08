@@ -11,5 +11,5 @@ jobs:
             - name: Setup PHP
               uses: shivammathur/setup-php@master
               with:
-                  php-version: 7.1
+                  php-version: 7.3
             - run: composer require friendsofphp/php-cs-fixer && vendor/bin/php-cs-fixer fix --diff --dry-run
