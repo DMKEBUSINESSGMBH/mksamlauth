@@ -17,7 +17,6 @@ use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Sv\AuthenticationService;
 
 class SamlAuth extends AuthenticationService
 {
