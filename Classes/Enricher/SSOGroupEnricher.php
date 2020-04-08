@@ -22,7 +22,6 @@ class SSOGroupEnricher implements EnricherInterface
             return;
         }
 
-        /** @var \Tx_Rnbase_Database_Connection$db */
         $qb = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_mksamlauth_domain_model_group_mapping');
 
@@ -38,7 +37,7 @@ class SSOGroupEnricher implements EnricherInterface
         $groups = $qb->execute()->fetchAll();
 
         // If there are no groups, we don't want to override them.
-        if (empty($groups)) {
+        if (0 === \count($groups)) {
             return;
         }
 

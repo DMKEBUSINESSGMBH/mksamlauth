@@ -7,7 +7,7 @@ namespace DMK\MKSamlAuth\Tests\Unit\Store;
 use DMK\MKSamlAuth\Session\PhpSession;
 use DMK\MKSamlAuth\Store\SessionSsoStateStore;
 use LightSaml\State\Sso\SsoState;
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;

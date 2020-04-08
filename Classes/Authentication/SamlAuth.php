@@ -71,10 +71,7 @@ class SamlAuth extends AuthenticationService
     private function receive(): FrontendUser
     {
         if (!\is_array($this->configuration)) {
-            throw new MissingConfigurationException(sprintf(
-                'There is no configuration for %s',
-                GeneralUtility::getIndpEnv('HTTP_HOST')
-            ));
+            throw new MissingConfigurationException(sprintf('There is no configuration for %s', GeneralUtility::getIndpEnv('HTTP_HOST')));
         }
 
         $buildContainer = $this->om->get(BuildContainer::class);
