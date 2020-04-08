@@ -31,11 +31,11 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
         $qb->setParameters([$entityId]);
 
         if (false === $stmt = $qb->execute()) {
-            return null;
+            return [];
         }
 
         if (false === $row = $stmt->fetch()) {
-            return null;
+            return [];
         }
 
         $certificate = new X509Certificate();

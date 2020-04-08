@@ -4,8 +4,11 @@ includes:
 
 parameters:
     reportUnmatchedIgnoredErrors: false
+    level: 1
     excludes_analyse:
         - %rootDir%/../../../../.Build
+        - %rootDir%/../../../../ext_localconf.php
+        - %rootDir%/../../../../ext_emconf.php
     autoload_directories:
         - %rootDir%/../../../../
     ignoreErrors:

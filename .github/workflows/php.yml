@@ -1,0 +1,38 @@
+name: PHP Checks
+
+on: [push, pull_request]
+
+jobs:
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Setup PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  php-version: 7.3
+            - run: composer require friendsofphp/php-cs-fixer
+            - run: .Build/bin/php-cs-fixer fix --diff --dry-run
+    phpstan:
+        name: PHPStan
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Setup PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  php-version: 7.3
+            - run: composer require phpstan/phpstan phpstan/phpstan-strict-rules saschaegerer/phpstan-typo3
+            - run: .Build/bin/phpstan analyze .
+    psalm:
+        name: Psalm
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Setup PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  php-version: 7.3
+            - run: composer require vimeo/psalm
+            - run: .Build/bin/psalm --show-info=true
