@@ -24,7 +24,7 @@ class EnricherRegistry implements EnricherInterface
             ));
         }
 
-        if (!array_key_exists($priority, self::$objects)) {
+        if (!\array_key_exists($priority, self::$objects)) {
             self::$objects[$priority] = [];
         }
 

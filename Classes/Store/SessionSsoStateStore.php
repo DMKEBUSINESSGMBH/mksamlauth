@@ -34,7 +34,7 @@ class SessionSsoStateStore implements SsoStateStoreInterface, SingletonInterface
     {
         $data = $this->session->get(self::SESSION_KEY);
 
-        if (!is_string($data)) {
+        if (!\is_string($data)) {
             $state = new SsoState();
             $this->set($state);
 
@@ -45,8 +45,8 @@ class SessionSsoStateStore implements SsoStateStoreInterface, SingletonInterface
             'allowed_classes' => [
                 SsoState::class,
                 ParameterBag::class,
-                SsoSessionState::class
-            ]
+                SsoSessionState::class,
+            ],
         ]);
 
         if (false === $data) {

@@ -54,6 +54,7 @@ class PhpSession implements SingletonInterface
     public function getId(): string
     {
         $this->start();
+
         return session_id();
     }
 
