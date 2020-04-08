@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Container;
 
+use DMK\MKSamlAuth\Exception\RuntimeException;
 use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Store\CredentialStore;
 use LightSaml\Build\Container\OwnContainerInterface;
@@ -31,10 +32,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnEntityDescriptorProvider()
     {
-        $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
+        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $record = $this->repository->findByHostname($host);
 
         if (false === \is_array($record)) {
-            return null;
+            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
         }
 
         $certificate = new X509Certificate();
@@ -50,10 +52,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnCredentials()
     {
-        $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
+        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $record = $this->repository->findByHostname($host);
 
         if (false === \is_array($record)) {
-            return null;
+            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
         }
 
         /** @var CredentialStore $store */

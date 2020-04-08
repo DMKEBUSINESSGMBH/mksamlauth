@@ -20,23 +20,20 @@ class FrontendUser
         return $this->data['uid'];
     }
 
-    public function setProperty($name, $value)
+    public function setProperty(string $name, string $value)
     {
         $this->data[$name] = $value;
     }
 
-    public function hasProperty($name)
+    public function hasProperty(string $name)
     {
         return isset($this->data[$name]);
     }
 
-    public function getProperty($name)
+    public function getProperty(string $name)
     {
         if (false === \array_key_exists($name, $this->data)) {
-            throw new PropertyNotFoundException(sprintf(
-                'The property "%s" does not exists!',
-                $name
-            ));
+            throw new PropertyNotFoundException(sprintf('The property "%s" does not exists!', $name));
         }
 
         return $this->data[$name];

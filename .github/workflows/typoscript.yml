@@ -1,10 +1,10 @@
-name: PHP Checks
+name: TypoScript Jobs
 
 on: [push, pull_request]
 
 jobs:
-    php-cs-fixer:
-        name: PHP-CS-Fixer
+    tslint:
+        name: TypoScript Lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
@@ -12,4 +12,5 @@ jobs:
               uses: shivammathur/setup-php@master
               with:
                   php-version: 7.3
-            - run: composer require friendsofphp/php-cs-fixer && vendor/bin/php-cs-fixer fix --diff --dry-run
+            - run: composer require helmich/typo3-typoscript-lint
+            - run: .Build/bin/typoscript-lint

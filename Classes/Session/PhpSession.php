@@ -36,7 +36,7 @@ class PhpSession implements SingletonInterface
 
         session_start(self::DEFAULT_SESSION_OPTIONS);
 
-        if (empty($_SESSION[self::SESSION_KEY])) {
+        if (false === isset($_SESSION[self::SESSION_KEY])) {
             // Additional (in case strict mode fails for some reason) session fixation protection
             session_regenerate_id(true);
             $_SESSION = [];
@@ -48,8 +48,6 @@ class PhpSession implements SingletonInterface
 
     /**
      * Returns the session id.
-     *
-     * @return string
      */
     public function getId(): string
     {
@@ -70,8 +68,7 @@ class PhpSession implements SingletonInterface
     /**
      * Sets a new value to the session.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function set(string $key, $value): void
     {
@@ -84,15 +81,13 @@ class PhpSession implements SingletonInterface
      * Gets a value from the storage, if the key could not be found
      * it will return null.
      *
-     * @param string $key
-     *
      * @return mixed|null
      */
     public function get(string $key)
     {
         $this->start();
 
-        if (empty($_SESSION[self::SESSION_KEY][$key])) {
+        if (\array_key_exists($key, $_SESSION[self::SESSION_KEY])) {
             return null;
         }
 

@@ -6,9 +6,9 @@ namespace DMK\MKSamlAuth;
 
 use DMK\MKSamlAuth\Enricher\EnricherInterface;
 use DMK\MKSamlAuth\Model\FrontendUser;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use function is_a;
 use function ksort;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EnricherRegistry implements EnricherInterface
 {
@@ -17,11 +17,7 @@ class EnricherRegistry implements EnricherInterface
     public static function register($class, $priority = 0)
     {
         if (!is_a($class, EnricherInterface::class, true)) {
-            throw new \LogicException(sprintf(
-                'The class "%s" does not implements "%s".',
-                $class,
-                EnricherInterface::class
-            ));
+            throw new \LogicException(sprintf('The class "%s" does not implements "%s".', $class, EnricherInterface::class));
         }
 
         if (!\array_key_exists($priority, self::$objects)) {

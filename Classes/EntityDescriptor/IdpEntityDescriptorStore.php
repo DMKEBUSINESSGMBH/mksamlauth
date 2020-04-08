@@ -35,7 +35,7 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
 
         $row = $qb->execute()->fetch();
 
-        return $row ? $this->map($row) : null;
+        return \is_array($row) ? $this->map($row) : null;
     }
 
     public function has($entityId)
