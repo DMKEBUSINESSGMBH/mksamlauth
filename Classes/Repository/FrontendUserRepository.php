@@ -32,7 +32,7 @@ class FrontendUserRepository
         $qb->setParameter('uid', $uid);
         $data = $qb->execute()->fetch(\PDO::FETCH_ASSOC);
 
-        if ($data) {
+        if (\is_array($data)) {
             return new FrontendUser($data);
         }
 
@@ -52,7 +52,7 @@ class FrontendUserRepository
 
         $data = $qb->execute()->fetch(\PDO::FETCH_ASSOC);
 
-        if ($data) {
+        if (\is_array($data)) {
             return new FrontendUser($data);
         }
 

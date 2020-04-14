@@ -30,7 +30,7 @@ class PartyContainer implements PartyContainerInterface, SingletonInterface
 
     public function getSpEntityDescriptorStore()
     {
-        return $this->container->getInstance(SpEntityDescriptorStore::class);;
+        return $this->container->getInstance(SpEntityDescriptorStore::class);
     }
 
     public function getTrustOptionsStore()

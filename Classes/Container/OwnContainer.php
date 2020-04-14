@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Container;
 
+use DMK\MKSamlAuth\Exception\RuntimeException;
 use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Store\CredentialStore;
 use LightSaml\Build\Container\OwnContainerInterface;
 use LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder;
-use LightSaml\Credential\CredentialInterface;
-use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
-use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -35,10 +32,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnEntityDescriptorProvider()
     {
-        $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
+        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $record = $this->repository->findByHostname($host);
 
-        if (false === is_array($record)) {
-            return null;
+        if (false === \is_array($record)) {
+            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
         }
 
         $certificate = new X509Certificate();
@@ -54,10 +52,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnCredentials()
     {
-        $record = $this->repository->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
+        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $record = $this->repository->findByHostname($host);
 
-        if (false === is_array($record)) {
-            return null;
+        if (false === \is_array($record)) {
+            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
         }
 
         /** @var CredentialStore $store */
