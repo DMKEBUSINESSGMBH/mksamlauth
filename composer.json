@@ -25,17 +25,12 @@
         "php": ">=7.1",
         "typo3/cms-core": "^8.7",
         "lightsaml/lightsaml": "^1.4",
-        "symfony/http-foundation": "^3.4"
+        "symfony/http-foundation": "^4.1"
     },
     "require-dev": {
-        "saschaegerer/phpstan-typo3": "*@dev",
-        "phpstan/phpstan-strict-rules": "*",
-        "phpstan/phpstan": "*",
         "roave/security-advisories": "dev-master",
-        "friendsofphp/php-cs-fixer": "^2.13",
         "phpunit/phpunit": "^7.1",
-        "nimut/testing-framework": "^5.0",
-        "helmich/typo3-typoscript-lint": "^1.4"
+        "nimut/testing-framework": "^5.0"
     },
     "autoload": {
         "psr-4": {

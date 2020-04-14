@@ -2,12 +2,10 @@
 
 namespace DMK\MKSamlAuth\Store;
 
-use LightSaml\Credential\CredentialInterface;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Credential\X509Credential;
 use LightSaml\Store\Credential\CredentialStoreInterface;
-use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 
@@ -33,18 +31,18 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
         $qb->setParameters([$entityId]);
 
         if (false === $stmt = $qb->execute()) {
-            return null;
+            return [];
         }
 
         if (false === $row = $stmt->fetch()) {
-            return null;
+            return [];
         }
 
         $certificate = new X509Certificate();
         $certificate->loadPem($row['certificate']);
 
         $privateKey = null;
-        if (0 < strlen($row['cert_key'])) {
+        if (0 < \strlen($row['cert_key'])) {
             $privateKey = KeyHelper::createPrivateKey(
                 $row['cert_key'],
                 $row['passphrase'],
@@ -58,5 +56,4 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
 
         return [$credential];
     }
-
 }

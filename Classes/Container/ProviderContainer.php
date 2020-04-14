@@ -9,7 +9,6 @@ use LightSaml\Provider\Attribute\FixedAttributeValueProvider;
 use LightSaml\Provider\NameID\FixedNameIdProvider;
 use LightSaml\Provider\Session\FixedSessionInfoProvider;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Extbase\Object\Container\Container;
 
 class ProviderContainer implements ProviderContainerInterface, SingletonInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Container;
 
-use DMK\MKSamlAuth\Session\TYPO3SessionStorage;
+use DMK\MKSamlAuth\Session\PhpSession;
 use LightSaml\Build\Container\SystemContainerInterface;
 use LightSaml\Provider\TimeProvider\SystemTimeProvider;
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
@@ -42,7 +42,7 @@ class SystemContainer implements SystemContainerInterface, SingletonInterface
         }
 
         return $session = new Session(
-            $this->container->getInstance(TYPO3SessionStorage::class)
+            $this->container->getInstance(PhpSession::class)
         );
     }
 

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DMK\MKSamlAuth\EntityDescriptor;
 
 use LightSaml\Model\Metadata\EntityDescriptor;
-use LightSaml\Model\Metadata\IdpSsoDescriptor;
-use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
@@ -36,7 +34,7 @@ class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 
         $row = $qb->execute()->fetch();
 
-        return $row ? $this->map($row) : null;
+        return \is_array($row) ? $this->map($row) : null;
     }
 
     public function has($entityId)
