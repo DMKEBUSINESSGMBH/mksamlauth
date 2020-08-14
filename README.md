@@ -4,6 +4,7 @@
 | -- | -- |
 | 8.7 | [![Build Status](https://api.travis-ci.org/DMKEBUSINESSGMBH/mksamlauth.svg?branch=8.7)](https://travis-ci.org/DMKEBUSINESSGMBH/mksamlauth) |
 | 9.5 | [![Build Status](https://api.travis-ci.org/DMKEBUSINESSGMBH/mksamlauth.svg?branch=9.5)](https://travis-ci.org/DMKEBUSINESSGMBH/mksamlauth) |
+| 10.4 | [![Build Status](https://api.travis-ci.org/DMKEBUSINESSGMBH/mksamlauth.svg?branch=10.4)](https://travis-ci.org/DMKEBUSINESSGMBH/mksamlauth) |
 
 
 [![Latest Version](https://img.shields.io/packagist/v/dmk/mksamlauth.svg?style=flat-square)](https://github.com/DMKEBUSINESSGMBH/mksamlauth/releases)
@@ -19,7 +20,7 @@ an IdP provider through the SAML2 protocol.
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this package:
 
 ```
-$ composer require dmk/mksamlauth:^9
+$ composer require dmk/mksamlauth:^10
 ```
 
 This command requires you to have Composer installed globally, as explained in the installation chapter of the Composer documentation.
