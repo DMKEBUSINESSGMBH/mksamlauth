@@ -12,6 +12,9 @@
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_domain">
                 <source>Domain</source>
             </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_root_page">
+                <source>Root page</source>
+            </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_user_folder">
                 <source>User Folder</source>
             </trans-unit>

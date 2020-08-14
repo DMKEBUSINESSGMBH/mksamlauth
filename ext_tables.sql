@@ -11,7 +11,7 @@ CREATE TABLE tx_mksamlauth_domain_model_identityprovider (
     endtime int(11) DEFAULT '0' NOT NULL,
 
     name VARCHAR(255) DEFAULT '' NOT NULL,
-    domain VARCHAR(255) NOT NULL,
+    root_page int(11) DEFAULT '0' NOT NULL,
     user_folder int(11) DEFAULT '0' NOT NULL,
     url VARCHAR(255) DEFAULT '' NOT NULL,
     certificate text NOT NULL,

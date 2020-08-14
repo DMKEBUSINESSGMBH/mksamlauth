@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Container;
 
+use DMK\MKSamlAuth\Authentication\SamlAuth;
 use DMK\MKSamlAuth\Exception\RuntimeException;
 use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Store\CredentialStore;
@@ -11,7 +12,6 @@ use LightSaml\Build\Container\OwnContainerInterface;
 use LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder;
 use LightSaml\Credential\X509Certificate;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class OwnContainer implements OwnContainerInterface, SingletonInterface
 {
@@ -32,11 +32,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnEntityDescriptorProvider()
     {
-        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
-        $record = $this->repository->findByHostname($host);
+        $rootPage = SamlAuth::getRootPageIdFromRequest();
+        $record = $this->repository->findByRootPage($rootPage);
 
         if (false === \is_array($record)) {
-            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
+            throw new RuntimeException(sprintf('No identity provider could be found for root page with id "%s".', $rootPage));
         }
 
         $certificate = new X509Certificate();
@@ -52,11 +52,11 @@ class OwnContainer implements OwnContainerInterface, SingletonInterface
 
     public function getOwnCredentials()
     {
-        $host = GeneralUtility::getIndpEnv('HTTP_HOST');
-        $record = $this->repository->findByHostname($host);
+        $rootPage = SamlAuth::getRootPageIdFromRequest();
+        $record = $this->repository->findByRootPage($rootPage);
 
         if (false === \is_array($record)) {
-            throw new RuntimeException(sprintf('No identity provider could be found for host "%s".', $host));
+            throw new RuntimeException(sprintf('No identity provider could be found for root page with id "%s".', $rootPage));
         }
 
         /** @var CredentialStore $store */

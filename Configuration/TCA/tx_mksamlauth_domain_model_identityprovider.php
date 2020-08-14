@@ -22,12 +22,14 @@ return [
                 'eval' => 'trim',
             ]
         ],
-        'domain' => [
-            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_domain',
+        'root_page' => [
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_root_page',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_domain',
+                'foreign_table' => 'pages',
+                'eval' => 'required',
+                'foreign_table_where' => ' AND {#pages}.{#sys_language_uid}=0 AND {#pages}.{#is_siteroot}=1 ORDER BY sorting'
             ]
         ],
         'user_folder' => [
@@ -96,7 +98,7 @@ return [
         '0' => [
             'showitem' => '
                 --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:general,
-                    domain,user_folder,
+                    root_page,user_folder,
                 --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:sp,
                     name,certificate,cert_key,passphrase,
                 --div--;LLL:EXT:mksamlauth/Resources/Private/Language/locallang_tabs.xlf:idp,

@@ -18,17 +18,16 @@ final class IdentityProviderRepository
         $this->pool = $pool;
     }
 
-    public function findByHostname(string $host)
+    public function findByRootPage(int $id)
     {
         $qb = $this->pool->getConnectionForTable('tx_mksamlauth_domain_model_identityprovider')
             ->createQueryBuilder();
 
         $qb->select('i.*');
         $qb->from('tx_mksamlauth_domain_model_identityprovider', 'i');
-        $qb->innerJoin('i', 'sys_domain', 'd', 'd.uid = i.domain');
         $qb->where($qb->expr()->eq(
-            'd.domainName',
-            $qb->createNamedParameter($host)
+            'i.root_page',
+            $qb->createNamedParameter($id)
         ));
 
         return $qb->execute()->fetch();

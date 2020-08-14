@@ -15,14 +15,27 @@ use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilde
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpSendAuthnRequestProfileBuilderFactory;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use TYPO3\CMS\Core\Authentication\AuthenticationService;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 
 class SamlAuth extends AuthenticationService
 {
     /**
-     * @var ObjectManager
+     * @var IdentityProviderRepository
+     */
+    private $identityProviderRepository;
+
+    /**
+     * @var UserCreator
+     */
+    private $userCreator;
+
+    /**
+     * @var \TYPO3\CMS\Core\SingletonInterface|ObjectManager
      */
     private $om;
 
@@ -34,9 +47,9 @@ class SamlAuth extends AuthenticationService
     public function __construct()
     {
         $this->om = GeneralUtility::makeInstance(ObjectManager::class);
-
-        $this->configuration = $this->om->get(IdentityProviderRepository::class)
-            ->findByHostname(GeneralUtility::getIndpEnv('HTTP_HOST'));
+        /** @var IdentityProviderRepository $identityProviderRepository */
+        $identityProviderRepository = $this->om->get(IdentityProviderRepository::class);
+        $this->configuration = $identityProviderRepository->findByRootPage(self::getRootPageIdFromRequest());
     }
 
     public function getUser()
@@ -110,5 +123,19 @@ class SamlAuth extends AuthenticationService
 
         $response->send();
         exit;
+    }
+
+    public static function getRootPageIdFromRequest(): int
+    {
+        /** @var ServerRequest $typo3Request */
+        $typo3Request = $GLOBALS['TYPO3_REQUEST'];
+        if ($typo3Request) {
+            /** @var Site $site */
+            $site = $typo3Request->getAttribute('site');
+            if ($site) {
+                return $site->getRootPageId();
+            }
+        }
+        return -1;
     }
 }

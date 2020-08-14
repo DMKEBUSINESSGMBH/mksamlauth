@@ -23,9 +23,9 @@
     ],
     "require": {
         "php": ">=7.1",
-        "typo3/cms-core": "^9.5",
-        "lightsaml/lightsaml": "^1.4",
-        "symfony/http-foundation": "^4.1"
+        "typo3/cms-core": "^10",
+        "thephplab/lightsaml": "^2.0",
+        "symfony/http-foundation": "^5.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
