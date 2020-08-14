@@ -12,7 +12,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'MKSamlAuth',
     'description' => 'Auth for SAML IDP',
     'shy' => 0,
-    'version' => '9.5.2',
+    'version' => '10.4.0',
     'dependencies' => 'cms',
     'conflicts' => '',
     'priority' => '',
@@ -31,7 +31,7 @@ $EM_CONF[$_EXTKEY] = [
     'CGLcompliance_note' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-9.5.99',
+            'typo3' => '10.4.0-10.4.99',
         ],
         'conflicts' => [],
         'suggests' => []
