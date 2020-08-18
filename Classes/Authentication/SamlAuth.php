@@ -11,6 +11,7 @@ use DMK\MKSamlAuth\Exception\RuntimeException;
 use DMK\MKSamlAuth\Model\FrontendUser;
 use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Service\UserCreator;
+use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilder;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpSendAuthnRequestProfileBuilderFactory;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
@@ -24,11 +25,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class SamlAuth extends AuthenticationService
 {
-    /**
-     * @var IdentityProviderRepository
-     */
-    private $identityProviderRepository;
-
     /**
      * @var UserCreator
      */
@@ -47,9 +43,8 @@ class SamlAuth extends AuthenticationService
     public function __construct()
     {
         $this->om = GeneralUtility::makeInstance(ObjectManager::class);
-        /** @var IdentityProviderRepository $identityProviderRepository */
-        $identityProviderRepository = $this->om->get(IdentityProviderRepository::class);
-        $this->configuration = $identityProviderRepository->findByRootPage(self::getRootPageIdFromRequest());
+        $configurationUtility = GeneralUtility::makeInstance(ConfigurationUtility::class);
+        $this->configuration = $configurationUtility->getConfiguration();
     }
 
     public function getUser()
@@ -109,7 +104,7 @@ class SamlAuth extends AuthenticationService
 
         $buildContainer = $this->om->get(BuildContainer::class);
         $factory = new SsoSpSendAuthnRequestProfileBuilderFactory($buildContainer);
-        $pb = $factory->get($this->configuration['idp_entity_id']);
+        $pb = $factory->get($this->configuration['idpEntityId']);
 
         $action = $pb->buildAction();
         $context = $pb->buildContext();
@@ -123,19 +118,5 @@ class SamlAuth extends AuthenticationService
 
         $response->send();
         exit;
-    }
-
-    public static function getRootPageIdFromRequest(): int
-    {
-        /** @var ServerRequest $typo3Request */
-        $typo3Request = $GLOBALS['TYPO3_REQUEST'];
-        if ($typo3Request) {
-            /** @var Site $site */
-            $site = $typo3Request->getAttribute('site');
-            if ($site) {
-                return $site->getRootPageId();
-            }
-        }
-        return -1;
     }
 }

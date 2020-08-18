@@ -2,50 +2,43 @@
 
 namespace DMK\MKSamlAuth\Store;
 
+use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Credential\X509Credential;
 use LightSaml\Store\Credential\CredentialStoreInterface;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 
 class CredentialStore implements CredentialStoreInterface, SingletonInterface
 {
     /**
-     * @var ConnectionPool
+     * @var array
      */
-    private $pool;
+    private $configuration;
 
-    public function __construct(ConnectionPool $pool)
+    public function __construct(ConfigurationUtility $configurationUtility)
     {
-        $this->pool = $pool;
+        $this->configuration = $configurationUtility->getConfiguration();
     }
 
     public function getByEntityId($entityId)
     {
-        $qb = $this->pool->getQueryBuilderForTable('tx_mksamlauth_domain_model_identityprovider');
-        $qb->select('*');
-        $qb->from('tx_mksamlauth_domain_model_identityprovider');
-        $qb->where($qb->expr()->eq('idp_entity_id', '?'));
-        $qb->setMaxResults(1);
-        $qb->setParameters([$entityId]);
-
-        if (false === $stmt = $qb->execute()) {
+        if (!\is_array($this->configuration)) {
             return [];
         }
 
-        if (false === $row = $stmt->fetch()) {
+        if ($entityId !== $this->configuration['idpEntityId']) {
             return [];
         }
 
         $certificate = new X509Certificate();
-        $certificate->loadPem($row['certificate']);
+        $certificate->loadPem($this->configuration['spCertificate']);
 
         $privateKey = null;
-        if (0 < \strlen($row['cert_key'])) {
+        if (0 < \strlen($this->configuration['spCertKey'])) {
             $privateKey = KeyHelper::createPrivateKey(
-                $row['cert_key'],
-                $row['passphrase'],
+                $this->configuration['spCertKey'],
+                $this->configuration['spPassphrase'],
                 false,
                 $certificate->getSignatureAlgorithm()
             );

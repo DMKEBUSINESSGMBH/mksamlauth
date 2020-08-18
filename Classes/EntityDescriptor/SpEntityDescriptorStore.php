@@ -4,37 +4,26 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\EntityDescriptor;
 
+use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 
 class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
-    /**
-     * @var ConnectionPool
-     */
-    private $pool;
-
-    public function __construct(ConnectionPool $pool)
+    public function __construct(ConfigurationUtility $configurationUtility)
     {
-        $this->pool = $pool;
+        $this->configuration = $configurationUtility->getConfiguration();
     }
 
     public function get($entityId)
     {
-        $conn = $this->pool->getConnectionForTable('tx_mksamlauth_domain_model_identityprovider');
+        if ($this->configuration && $entityId === $this->configuration['spName']) {
+            return $this->map($this->configuration);
+        }
 
-        $qb = $conn->createQueryBuilder();
-        $qb->select('i.*');
-        $qb->from('tx_mksamlauth_domain_model_identityprovider', 'i');
-        $qb->where($qb->expr()->eq('i.name', ':id'));
-        $qb->setParameter(':id', $entityId);
-
-        $row = $qb->execute()->fetch();
-
-        return \is_array($row) ? $this->map($row) : null;
+        return null;
     }
 
     public function has($entityId)
@@ -44,16 +33,15 @@ class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 
     public function all()
     {
-        $conn = $this->pool->getConnectionForTable('tx_mksamlauth_domain_model_identityprovider');
+        $configurations = [];
 
-        $qb = $conn->createQueryBuilder();
-        $qb->select('i.*');
-        $qb->from('tx_mksamlauth_domain_model_identityprovider', 'i');
-        $qb->groupBy('i.name');
+        if ($this->configuration) {
+            $configurations[] = $this->configuration;
+        }
 
         $result = [];
 
-        foreach ($qb->execute()->fetchAll() as $row) {
+        foreach ($configurations as $row) {
             $result[] = $this->map($row);
         }
 
@@ -63,14 +51,14 @@ class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
     private function map(array $row): EntityDescriptor
     {
         $descriptor = new SpSsoDescriptor();
-        $descriptor->addAssertionConsumerService($row['name']);
+        $descriptor->addAssertionConsumerService($row['spName']);
 
         $entityDescriptor = new EntityDescriptor(
-            $row['idp_entity_id'],
+            $row['idpEntityId'],
             [$descriptor]
         );
 
-        $entityDescriptor->setSignature(new SignatureStringReader($row['idp_certificate']));
+        $entityDescriptor->setSignature(new SignatureStringReader($row['idpCertificate']));
 
         return $entityDescriptor;
     }

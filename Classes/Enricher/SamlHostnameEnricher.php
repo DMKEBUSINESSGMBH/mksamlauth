@@ -13,6 +13,6 @@ class SamlHostnameEnricher implements EnricherInterface
         if (null !== $user->getUid()) {
             return;
         }
-        $user->setProperty('mksamlauth_host', $context['idp']['name']);
+        $user->setProperty('mksamlauth_host', $context['idp']['spName']);
     }
 }

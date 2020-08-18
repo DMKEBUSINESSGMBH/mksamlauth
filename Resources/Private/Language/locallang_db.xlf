@@ -70,6 +70,9 @@
             <trans-unit id="tx_mksaml_auth.domain_model_group_mapping.group_ids">
                 <source>Groups</source>
             </trans-unit>
+            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_enabled">
+                <source>Enabled</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

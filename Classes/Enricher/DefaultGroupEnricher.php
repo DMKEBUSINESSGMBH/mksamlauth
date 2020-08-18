@@ -14,8 +14,8 @@ class DefaultGroupEnricher implements EnricherInterface
             return;
         }
 
-        if ($context['idp']['default_groups_enable'] && $context['idp']['default_groups']) {
-            $user->setProperty('usergroup', $context['idp']['default_groups']);
+        if ($context['idp']['defaultGroupsEnable'] && $context['idp']['defaultGroups']) {
+            $user->setProperty('usergroup', $context['idp']['defaultGroups']);
         }
     }
 }

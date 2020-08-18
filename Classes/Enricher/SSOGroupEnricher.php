@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class SSOGroupEnricher implements EnricherInterface
 {
-    const ATTRIBUTE_KEY = 'memberof';
+    public const ATTRIBUTE_KEY = 'memberof';
 
     public function process(FrontendUser $user, array $context)
     {

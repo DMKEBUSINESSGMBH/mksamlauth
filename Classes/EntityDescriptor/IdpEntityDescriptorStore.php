@@ -4,38 +4,33 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\EntityDescriptor;
 
+use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, SingletonInterface
 {
     /**
-     * @var ConnectionPool
+     * @var array
      */
-    private $pool;
+    private $configuration;
 
-    public function __construct(ConnectionPool $connectionPool)
+    public function __construct(ConfigurationUtility $configurationUtility)
     {
-        $this->pool = $connectionPool;
+        $this->configuration = $configurationUtility->getConfiguration();
     }
 
     public function get($entityId)
     {
-        $conn = $this->pool->getConnectionForTable('tx_mksamlauth_domain_model_identityprovider');
-        $qb = $conn->createQueryBuilder();
-        $qb->select('i.*');
-        $qb->from('tx_mksamlauth_domain_model_identityprovider', 'i');
-        $qb->where($qb->expr()->eq('i.idp_entity_id', ':id'));
-        $qb->setParameter(':id', $entityId);
+        if ($this->configuration && $entityId === $this->configuration['idpEntityId']) {
+            return $this->map($this->configuration);
+        }
 
-        $row = $qb->execute()->fetch();
-
-        return \is_array($row) ? $this->map($row) : null;
+        return null;
     }
 
     public function has($entityId)
@@ -45,17 +40,15 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
 
     public function all()
     {
-        $conn = $this->pool->getConnectionForTable('tx_mksamlauth_domain_model_identityprovider');
-        $qb = $conn->createQueryBuilder();
-        $qb->select('i.*');
-        $qb->from('tx_mksamlauth_domain_model_identityprovider', 'i');
-        $qb->groupBy('i.idp_entity_id');
+        $configurations = [];
 
-        $stmt = $qb->execute();
+        if ($this->configuration) {
+            $configurations[] = $this->configuration;
+        }
 
         $result = [];
 
-        foreach ($stmt->fetchAll() as $row) {
+        foreach ($configurations as $row) {
             $result[] = $this->map($row);
         }
 
@@ -65,13 +58,13 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
     private function map(array $row): EntityDescriptor
     {
         $certificate = new X509Certificate();
-        $certificate->loadPem($row['idp_certificate']);
+        $certificate->loadPem($row['idpCertificate']);
 
         return GeneralUtility::makeInstance(
             SimpleEntityDescriptorBuilder::class,
-            $row['idp_entity_id'],
+            $row['idpEntityId'],
             null,
-            $row['url'],
+            $row['idpUrl'],
             $certificate
         )->get();
     }
