@@ -19,7 +19,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_mksamlauth_domain_model_identityprovider',
+                'itemsProcFunc' => \DMK\MKSamlAuth\Utility\ConfigurationUtility::class.'->getSpNamesForTCA',
             ]
         ],
         'group_ids' => [

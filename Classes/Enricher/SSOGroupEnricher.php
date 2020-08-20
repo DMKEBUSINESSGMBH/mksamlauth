@@ -31,7 +31,7 @@ class SSOGroupEnricher implements EnricherInterface
             $qb->expr()->eq('e.idp_id', ':id'),
             $qb->expr()->in('e.idp_name', ':names')
         ));
-        $qb->setParameter('id', $context['idp']['uid']);
+        $qb->setParameter('id', $context['idp']['rootPageUid']);
         $qb->setParameter('names', $names, Connection::PARAM_STR_ARRAY);
 
         $groups = $qb->execute()->fetchAll();
