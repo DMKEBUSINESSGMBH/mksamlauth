@@ -19,9 +19,15 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
      */
     private $configuration;
 
+    /**
+     * @var ConfigurationUtility
+     */
+    private $configurationUtility;
+
     public function __construct(ConfigurationUtility $configurationUtility)
     {
         $this->configuration = $configurationUtility->getConfiguration();
+        $this->configurationUtility = $configurationUtility;
     }
 
     public function get($entityId)
@@ -40,11 +46,7 @@ class IdpEntityDescriptorStore implements EntityDescriptorStoreInterface, Single
 
     public function all()
     {
-        $configurations = [];
-
-        if ($this->configuration) {
-            $configurations[] = $this->configuration;
-        }
+        $configurations = $this->configurationUtility->getAllConfigurations();
 
         $result = [];
 

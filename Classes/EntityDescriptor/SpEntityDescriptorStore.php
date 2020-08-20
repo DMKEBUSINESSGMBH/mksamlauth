@@ -12,9 +12,15 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 
 class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
+    /**
+     * @var ConfigurationUtility
+     */
+    private $configurationUtility;
+
     public function __construct(ConfigurationUtility $configurationUtility)
     {
         $this->configuration = $configurationUtility->getConfiguration();
+        $this->configurationUtility = $configurationUtility;
     }
 
     public function get($entityId)
@@ -33,11 +39,7 @@ class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 
     public function all()
     {
-        $configurations = [];
-
-        if ($this->configuration) {
-            $configurations[] = $this->configuration;
-        }
+        $configurations = $this->configurationUtility->getAllConfigurations();
 
         $result = [];
 
@@ -59,7 +61,6 @@ class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
         );
 
         $entityDescriptor->setSignature(new SignatureStringReader($row['idpCertificate']));
-
         return $entityDescriptor;
     }
 }

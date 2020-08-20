@@ -9,19 +9,15 @@ use DMK\MKSamlAuth\Container\BuildContainer;
 use DMK\MKSamlAuth\Exception\MissingConfigurationException;
 use DMK\MKSamlAuth\Exception\RuntimeException;
 use DMK\MKSamlAuth\Model\FrontendUser;
-use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Service\UserCreator;
 use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilder;
 use LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpSendAuthnRequestProfileBuilderFactory;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use TYPO3\CMS\Core\Authentication\AuthenticationService;
-use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Log\LogManager;
-use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-
 
 class SamlAuth extends AuthenticationService
 {
@@ -60,7 +56,6 @@ class SamlAuth extends AuthenticationService
                 } catch (\Exception $e) {
                     GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)
                         ->emergency($e->getMessage(), ['e' => $e->getMessage()]);
-
                     return false;
                 }
             } else {

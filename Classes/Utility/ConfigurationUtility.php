@@ -2,12 +2,15 @@
 
 namespace DMK\MKSamlAuth\Utility;
 
-use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Http\ServerRequestFactory;
+use TYPO3\CMS\Core\Routing\SiteMatcher;
+use TYPO3\CMS\Core\Routing\SiteRouteResult;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\SiteFinder;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ConfigurationUtility
+class ConfigurationUtility implements SingletonInterface
 {
     public const CONFIGURATION_NAMESPACE = 'mksamlauthConfig';
     public const REQUIRED_FIELDS = [
@@ -22,6 +25,11 @@ class ConfigurationUtility
      */
     private $siteFinder;
 
+    /**
+     * @var SiteMatcher
+     */
+    private $siteMatcher;
+
     public static function isConfigurationComplete(array $configuration): bool
     {
         foreach (self::REQUIRED_FIELDS as $field) {
@@ -33,19 +41,18 @@ class ConfigurationUtility
         return true;
     }
 
-    public function __construct()
+    public function __construct(SiteFinder $siteFinder, SiteMatcher $siteMatcher)
     {
-        $this->siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+        $this->siteMatcher = $siteMatcher;
+        $this->siteFinder = $siteFinder;
     }
 
     public function getConfiguration(bool $includeDisabled = false): ?array
     {
         $configuration = null;
-        /** @var ServerRequest $typo3Request */
-        $typo3Request = $GLOBALS['TYPO3_REQUEST'];
-        if ($typo3Request) {
-            /** @var Site $site */
-            $site = $typo3Request->getAttribute('site');
+        /** @var Site $site */
+        $site = $this->getCurrentSite();
+        if ($site) {
             $configuration = $this->getConfigurationFromSite($site, $includeDisabled);
         }
 
@@ -95,5 +102,13 @@ class ConfigurationUtility
         $configuration['rootPageId'] = $site->getRootPageId();
 
         return $configuration;
+    }
+
+    private function getCurrentSite(): ?SiteInterface
+    {
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? ServerRequestFactory::fromGlobals();
+        /** @var SiteRouteResult $routeResult */
+        $routeResult = $this->siteMatcher->matchRequest($request);
+        return $routeResult->getSite();
     }
 }
