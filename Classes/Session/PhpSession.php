@@ -86,8 +86,7 @@ class PhpSession implements SingletonInterface
     public function get(string $key)
     {
         $this->start();
-
-        if (\array_key_exists($key, $_SESSION[self::SESSION_KEY])) {
+        if (!\array_key_exists($key, $_SESSION[self::SESSION_KEY])) {
             return null;
         }
 
