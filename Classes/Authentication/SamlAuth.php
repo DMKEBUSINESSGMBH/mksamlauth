@@ -49,7 +49,7 @@ class SamlAuth extends AuthenticationService
             return false;
         }
 
-        if ('getUserFE' === $this->mode && 'logout' !== $this->login['status']) {
+        if ('getUserFE' === $this->mode && 'login' !== $this->login['status'] && 'logout' !== $this->login['status']) {
             if (null !== GeneralUtility::_POST('SAMLResponse')) {
                 try {
                     return $this->pObj->getRawUserByUid($this->receive()->getUid());
