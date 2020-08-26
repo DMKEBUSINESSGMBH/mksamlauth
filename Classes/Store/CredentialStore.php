@@ -32,7 +32,7 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
         }
 
         $certificate = new X509Certificate();
-        $certificate->loadPem($this->configuration['spCertificate']);
+        $certificate->loadPem($this->configuration['idpCertificate']);
 
         $privateKey = null;
         if (0 < \strlen($this->configuration['spCertKey'])) {
