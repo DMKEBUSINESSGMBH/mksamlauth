@@ -17,6 +17,7 @@ call_user_func(static function ($_EXTKEY): void {
             'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:enabled.label',
             'config' => [
                 'type' => 'check',
+                'default' => 0,
             ],
         ],
         'mksamlauthConfigCheckForActiveUserSession' => [
@@ -24,6 +25,15 @@ call_user_func(static function ($_EXTKEY): void {
             'description' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:check_for_active_user_session.description',
             'config' => [
                 'type' => 'check',
+                'default' => 0,
+            ],
+        ],
+        'mksamlauthConfigDisableDefaultLogin' => [
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:disable_default_login.label',
+            'description' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:disable_default_login.description',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
             ],
         ],
         'mksamlauthConfigUserFolder' => [
@@ -99,7 +109,7 @@ call_user_func(static function ($_EXTKEY): void {
     $GLOBALS['SiteConfiguration']['site']['columns'] = array_merge($GLOBALS['SiteConfiguration']['site']['columns'],
         $columns);
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_general'] = [
-        'showitem' => 'mksamlauthConfigEnabled,mksamlauthConfigCheckForActiveUserSession,mksamlauthConfigUserFolder,',
+        'showitem' => 'mksamlauthConfigEnabled,mksamlauthConfigCheckForActiveUserSession,mksamlauthConfigDisableDefaultLogin,--linebreak--,mksamlauthConfigUserFolder,',
     ];
 
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_sp'] = [

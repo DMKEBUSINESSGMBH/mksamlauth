@@ -12,6 +12,12 @@
             <trans-unit id="check_for_active_user_session.description">
                 <source>If there is a valid user session, no new login process will be started.</source>
             </trans-unit>
+            <trans-unit id="disable_default_login.label">
+                <source>Disallow default FE login</source>
+            </trans-unit>
+            <trans-unit id="disable_default_login.description">
+                <source>Only SAML authentication will work, if active!</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
