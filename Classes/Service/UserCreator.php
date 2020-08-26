@@ -23,20 +23,23 @@ final class UserCreator implements SingletonInterface
 
     public function updateOrCreate(array $attributes, array $record)
     {
-        $userFolder = $record['user_folder'];
+        $userFolder = $record['userFolder'];
 
         if (!($attributes['uid'] ?? false)) {
             throw new \LogicException('The idp does not return any "uid". Please check the configuration in the idp settings.');
         }
 
-        $user = $this->manager->getRepository()->findByUsername($attributes['uid'], $record['user_folder']);
+        $user = $this->manager->getRepository()->findByUsername($attributes['uid'], $record['userFolder']);
 
         if (null === $user) {
             $user = new FrontendUser([
                 'username' => $attributes['uid'],
                 'pid' => $userFolder,
+                'crdate' => \time(),
             ]);
         }
+
+
 
         unset($attributes['uid']);
 
@@ -44,6 +47,8 @@ final class UserCreator implements SingletonInterface
             'idp' => $record,
             'attributes' => $attributes,
         ]);
+
+        $user->setProperty('tstamp', \time());
 
         $this->manager->save($user);
 

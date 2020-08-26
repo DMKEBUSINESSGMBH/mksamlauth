@@ -20,7 +20,7 @@ class FrontendUser
         return $this->data['uid'];
     }
 
-    public function setProperty(string $name, string $value)
+    public function setProperty(string $name, $value)
     {
         $this->data[$name] = $value;
     }
