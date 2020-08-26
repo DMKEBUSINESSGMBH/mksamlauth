@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1415814796" source-language="en" datatype="plaintext" original="messages">
+        <header/>
+        <body>
+            <trans-unit id="enabled.label">
+                <source>Enabled</source>
+            </trans-unit>
+            <trans-unit id="check_for_active_user_session.label">
+                <source>Check for active user session</source>
+            </trans-unit>
+            <trans-unit id="check_for_active_user_session.description">
+                <source>If there is a valid user session, no new login process will be started.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -48,8 +48,9 @@ class SamlAuth extends AuthenticationService
         if (!\is_array($this->configuration)) {
             return false;
         }
+
         // if the user has a session, skip new login
-        if ($this->authInfo['userSession']) {
+        if ($this->configuration['checkForActiveUserSession'] && $this->authInfo['userSession']) {
             return false;
         }
 

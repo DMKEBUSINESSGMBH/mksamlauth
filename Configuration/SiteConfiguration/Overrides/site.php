@@ -14,7 +14,14 @@ call_user_func(static function ($_EXTKEY): void {
             ],
         ],
         'mksamlauthConfigEnabled' => [
-            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_db.xlf:tx_mksamlauth_domain_model_identityprovider.item_enabled',
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:enabled.label',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'mksamlauthConfigCheckForActiveUserSession' => [
+            'label' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:check_for_active_user_session.label',
+            'description' => 'LLL:EXT:mksamlauth/Resources/Private/Language/locallang_site.xlf:check_for_active_user_session.description',
             'config' => [
                 'type' => 'check',
             ],
@@ -92,19 +99,19 @@ call_user_func(static function ($_EXTKEY): void {
     $GLOBALS['SiteConfiguration']['site']['columns'] = array_merge($GLOBALS['SiteConfiguration']['site']['columns'],
         $columns);
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_general'] = [
-        'showitem' => 'mksamlauthConfigEnabled,mksamlauthConfigUserFolder',
+        'showitem' => 'mksamlauthConfigEnabled,mksamlauthConfigCheckForActiveUserSession,mksamlauthConfigUserFolder,',
     ];
 
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_sp'] = [
-        'showitem' => 'mksamlauthConfigSpName,--linebreak--,mksamlauthConfigSpCertificate,--linebreak--,mksamlauthConfigSpCertKey,--linebreak--,mksamlauthConfigSpPassphrase',
+        'showitem' => 'mksamlauthConfigSpName,--linebreak--,mksamlauthConfigSpCertificate,mksamlauthConfigSpCertKey,mksamlauthConfigSpPassphrase',
     ];
 
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_idp'] = [
-        'showitem' => 'mksamlauthConfigIdpEntityId,--linebreak--,mksamlauthConfigIdpUrl,--linebreak--,mksamlauthConfigIdpCertificate',
+        'showitem' => 'mksamlauthConfigIdpEntityId,mksamlauthConfigIdpUrl,mksamlauthConfigIdpCertificate',
     ];
 
     $GLOBALS['SiteConfiguration']['site']['palettes']['mksamlauth_features'] = [
-        'showitem' => 'mksamlauthConfigDefaultGroupsEnable,--linebreak--,mksamlauthConfigDefaultGroups',
+        'showitem' => 'mksamlauthConfigDefaultGroupsEnable,mksamlauthConfigDefaultGroups',
     ];
 
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ','.implode(', ', [

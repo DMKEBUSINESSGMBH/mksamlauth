@@ -25,7 +25,7 @@
                 <source>OpenSSL Key</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_passphrase">
-                <source>Passphrase</source>
+                <source>Passphrase for OpenSSL Key</source>
             </trans-unit>
             <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_certificate">
                 <source>Certificate</source>
@@ -60,7 +60,6 @@
             <trans-unit id="tx_mksamlauth_domain_model_serviceprovider.item_passphrase">
                 <source>OpenSSL Key - Passphrase</source>
             </trans-unit>
-
             <trans-unit id="tx_mksamlauth_domain_model_group_mapping">
                 <source>Group Mapping</source>
             </trans-unit>
@@ -69,9 +68,6 @@
             </trans-unit>
             <trans-unit id="tx_mksaml_auth.domain_model_group_mapping.group_ids">
                 <source>Groups</source>
-            </trans-unit>
-            <trans-unit id="tx_mksamlauth_domain_model_identityprovider.item_enabled">
-                <source>Enabled</source>
             </trans-unit>
         </body>
     </file>
