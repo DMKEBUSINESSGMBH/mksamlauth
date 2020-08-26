@@ -48,6 +48,10 @@ class SamlAuth extends AuthenticationService
         if (!\is_array($this->configuration)) {
             return false;
         }
+        // if the user has a session, skip new login
+        if ($this->authInfo['userSession']) {
+            return false;
+        }
 
         if ('getUserFE' === $this->mode && 'login' !== $this->login['status'] && 'logout' !== $this->login['status']) {
             if (null !== GeneralUtility::_POST('SAMLResponse')) {
