@@ -79,7 +79,8 @@ class SamlAuth extends AuthenticationService
 
     public function authUser(array $user): int
     {
-        return \is_array($this->configuration) ? 200 : 0;
+        // allow other authentication methods, e.g. default FE login
+        return \is_array($this->configuration) ? 200 : 101;
     }
 
     private function receive(): FrontendUser
