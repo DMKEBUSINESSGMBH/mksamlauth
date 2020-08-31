@@ -13,6 +13,11 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 class SpEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
     /**
+     * @var array
+     */
+    private $configuration;
+
+    /**
      * @var ConfigurationUtility
      */
     private $configurationUtility;

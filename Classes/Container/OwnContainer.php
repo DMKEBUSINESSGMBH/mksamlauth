@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace DMK\MKSamlAuth\Container;
 
-use DMK\MKSamlAuth\Authentication\SamlAuth;
 use DMK\MKSamlAuth\Exception\RuntimeException;
-use DMK\MKSamlAuth\Repository\IdentityProviderRepository;
 use DMK\MKSamlAuth\Store\CredentialStore;
 use DMK\MKSamlAuth\Utility\ConfigurationUtility;
 use LightSaml\Build\Container\OwnContainerInterface;
