@@ -81,8 +81,12 @@ class ConfigurationUtility implements SingletonInterface
         }
     }
 
-    private function getConfigurationFromSite(Site $site, bool $includeDisabled = false): ?array
+    private function getConfigurationFromSite(SiteInterface $site, bool $includeDisabled = false): ?array
     {
+        if (!$site instanceof Site) {
+            return null;
+        }
+
         $fullConfig = $site->getConfiguration();
         $configuration = [];
         foreach ($fullConfig as $key => $value) {
