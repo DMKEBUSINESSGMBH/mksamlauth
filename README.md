@@ -2,12 +2,10 @@
 
 | TYPO3 Version | Status |
 | -- | -- |
-| 8.7 | [![Build Status](https://api.travis-ci.org/DMKEBUSINESSGMBH/mksamlauth.svg?branch=8.7)](https://travis-ci.org/DMKEBUSINESSGMBH/mksamlauth) |
-| 9.5 | [![Build Status](https://api.travis-ci.org/DMKEBUSINESSGMBH/mksamlauth.svg?branch=9.5)](https://travis-ci.org/DMKEBUSINESSGMBH/mksamlauth) |
+| 8.7 | [![Build Status](https://api.travis-ci.com/DMKEBUSINESSGMBH/mksamlauth.svg?branch=8.7)](https://travis-ci.com/DMKEBUSINESSGMBH/mksamlauth) |
+| 9.5 | [![Build Status](https://api.travis-ci.com/DMKEBUSINESSGMBH/mksamlauth.svg?branch=9.5)](https://travis-ci.com/DMKEBUSINESSGMBH/mksamlauth) |
 
-
-[![Latest Version](https://img.shields.io/packagist/v/dmk/mksamlauth.svg?style=flat-square)](https://github.com/DMKEBUSINESSGMBH/mksamlauth/releases)
-
+[![Latest Version](https://img.shields.io/packagist/v/dmk/mksamlauth.svg?logo=composer)](https://github.com/DMKEBUSINESSGMBH/mksamlauth/releases)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/quality-score.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=9.5)
 [![Code Coverage](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/badges/coverage.png?b=8.7)](https://scrutinizer-ci.com/g/DMKEBUSINESSGMBH/mksamlauth/?branch=9.5)
 
