@@ -30,7 +30,7 @@
     "require-dev": {
         "roave/security-advisories": "dev-master",
         "phpunit/phpunit": "^7.1",
-        "nimut/testing-framework": "^4.1"
+        "nimut/testing-framework": "^5.0"
     },
     "autoload": {
         "psr-4": {
