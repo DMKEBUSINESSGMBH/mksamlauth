@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 class PhpSession implements SingletonInterface
 {
-    private const DEFAULT_SESSION_OPTIONS = [
+    const DEFAULT_SESSION_OPTIONS = [
         'name' => 'saml_auth',
         'cookie_secure' => true,
         'cookie_httponly' => true,
@@ -18,7 +18,7 @@ class PhpSession implements SingletonInterface
         'use_strict_mode' => true,
     ];
 
-    private const SESSION_KEY = 'DMK_SESSION';
+    const SESSION_KEY = 'DMK_SESSION';
 
     /**
      * @var bool
@@ -28,7 +28,7 @@ class PhpSession implements SingletonInterface
     /**
      * Starts the new session.
      */
-    public function start(): void
+    public function start()
     {
         if ($this->started) {
             return;
@@ -60,7 +60,7 @@ class PhpSession implements SingletonInterface
     /**
      * Closes the session and write it down.
      */
-    public function close(): void
+    public function close()
     {
         $this->started = false;
         session_write_close();
@@ -72,7 +72,7 @@ class PhpSession implements SingletonInterface
      * @param string $key
      * @param mixed  $value
      */
-    public function set(string $key, $value): void
+    public function set(string $key, $value)
     {
         $this->start();
 

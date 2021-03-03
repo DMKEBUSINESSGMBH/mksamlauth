@@ -5,16 +5,20 @@ namespace DMK\MKSamlAuth\Store;
 use DMK\MKSamlAuth\Session\PhpSession;
 use LightSaml\Store\Request\AbstractRequestStateArrayStore;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class RequestStateStore extends AbstractRequestStateArrayStore implements SingletonInterface
 {
-    private const SESSION_KEY = 'req_state';
+    const SESSION_KEY = 'req_state';
 
     private $session;
 
-    public function __construct(PhpSession $session)
+    public function __construct()
     {
-        $this->session = $session;
+        /** @var ObjectManager $om */
+        $om = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->session = $om->get(PhpSession::class);
     }
 
     protected function getArray()
@@ -22,7 +26,7 @@ class RequestStateStore extends AbstractRequestStateArrayStore implements Single
         return $this->session->get(self::SESSION_KEY);
     }
 
-    protected function setArray(array $arr): void
+    protected function setArray(array $arr)
     {
         $this->session->set(self::SESSION_KEY, $arr);
     }

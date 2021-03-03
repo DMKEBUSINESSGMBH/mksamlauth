@@ -112,6 +112,5 @@ class SamlAuth extends AuthenticationService
         }
 
         $response->send();
-        exit;
     }
 }
