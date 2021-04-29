@@ -1,0 +1,30 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  target-branch: "8.7"
+  ignore:
+  - dependency-name: helmich/typo3-typoscript-lint
+    versions:
+    - "> 1.4"
+  - dependency-name: symfony/http-foundation
+    versions:
+    - ">= 4.3.a, < 4.4"
+  - dependency-name: typo3/cms-core
+    versions:
+    - ">= 9.a, < 10"
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  target-branch: "9.5"
+  ignore:
+  - dependency-name: helmich/typo3-typoscript-lint
+    versions:
+    - "> 1.4"
