@@ -27,6 +27,19 @@ class EnricherRegistry implements EnricherInterface
         self::$objects[$priority][] = $class;
     }
 
+    public static function unregister($class, $priority = 0)
+    {
+        if (!isset(self::$objects[$priority])) {
+            return;
+        }
+
+        if (!isset(self::$objects[$priority][$class])) {
+            return;
+        }
+
+        unset(self::$objects[$priority][$class]);
+    }
+
     public function process(FrontendUser $user, array $context)
     {
         foreach ($this->flatten(self::$objects) as $className) {
