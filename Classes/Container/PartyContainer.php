@@ -35,9 +35,13 @@ class PartyContainer implements PartyContainerInterface, SingletonInterface
 
     public function getTrustOptionsStore()
     {
+        $trustOptions = new TrustOptions();
+        $trustOptions->setSignAuthnRequest(true);
+        $trustOptions->setEncryptAuthnRequest(true);
+
         /** @var FixedTrustOptionsStore $trustStore */
         $trustStore = $this->container->getInstance(FixedTrustOptionsStore::class);
-        $trustStore->setTrustOptions(new TrustOptions());
+        $trustStore->setTrustOptions($trustOptions);
 
         return $trustStore;
     }
