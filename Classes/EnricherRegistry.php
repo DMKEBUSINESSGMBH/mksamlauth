@@ -14,23 +14,30 @@ class EnricherRegistry implements EnricherInterface
 {
     private static $objects = [];
 
-    public static function register($class, $priority = 0)
+    public static function register($className, $priority = 0)
     {
-        if (!is_a($class, EnricherInterface::class, true)) {
-            throw new \LogicException(sprintf('The class "%s" does not implements "%s".', $class, EnricherInterface::class));
+        if (!is_a($className, EnricherInterface::class, true)) {
+            throw new \LogicException(sprintf('The class "%s" does not implements "%s".', $className, EnricherInterface::class));
         }
 
         if (!\array_key_exists($priority, self::$objects)) {
             self::$objects[$priority] = [];
         }
 
-        self::$objects[$priority][] = $class;
+        self::$objects[$priority][$className] = $className;
+    }
+
+    public static function unregister($className, $priority = 0)
+    {
+        if (self::$objects[$priority][$className] ?? false) {
+            unset(self::$objects[$priority][$className]);
+        }
     }
 
     public function process(FrontendUser $user, array $context)
     {
         foreach ($this->flatten(self::$objects) as $className) {
-            GeneralUtility::makeInstance($className)->process($user, $context);
+            GeneralUtility::makeInstance($className)->process($context);
         }
     }
 
