@@ -24,7 +24,7 @@ class EnricherRegistry implements EnricherInterface
             self::$objects[$priority] = [];
         }
 
-        self::$objects[$priority][$className] = true;
+        self::$objects[$priority][$className] = $className;
     }
 
     public static function unregister($className, $priority = 0)
@@ -36,7 +36,7 @@ class EnricherRegistry implements EnricherInterface
 
     public function process(FrontendUser $user, array $context)
     {
-        foreach ($this->flatten(self::$objects) as $className => $value) {
+        foreach ($this->flatten(self::$objects) as $className) {
             GeneralUtility::makeInstance($className)->process($context);
         }
     }
