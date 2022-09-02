@@ -26,9 +26,8 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
         $qb = $this->pool->getQueryBuilderForTable('tx_mksamlauth_domain_model_identityprovider');
         $qb->select('*');
         $qb->from('tx_mksamlauth_domain_model_identityprovider');
-        $qb->where($qb->expr()->eq('idp_entity_id', '?'));
+        $qb->where($qb->expr()->eq('name', $qb->createNamedParameter($entityId)));
         $qb->setMaxResults(1);
-        $qb->setParameters([$entityId]);
 
         if (false === $stmt = $qb->execute()) {
             return [];
@@ -37,6 +36,7 @@ class CredentialStore implements CredentialStoreInterface, SingletonInterface
         if (false === $row = $stmt->fetch()) {
             return [];
         }
+
 
         $certificate = new X509Certificate();
         $certificate->loadPem($row['certificate']);
