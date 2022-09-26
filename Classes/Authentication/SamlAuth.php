@@ -65,7 +65,12 @@ class SamlAuth extends AuthenticationService
 
     public function authUser(array $user): int
     {
-        return \is_array($this->configuration) ? 200 : 0;
+        try {
+            return $this->receive()->getUid() === $user['uid'] ? 200 : 100;
+        }
+        catch (MissingConfigurationException $exception) {
+            return 100;
+        }
     }
 
     private function receive(): FrontendUser
